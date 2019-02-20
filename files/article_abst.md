@@ -26,4 +26,38 @@
 
 ![](./img/lsgan.png)
 
-- 
+- 上図のb)がsigmoid cross entropy誤差，c)が最小二乗誤差．最小二乗誤差では生成されるデータをリアルに近づけることができる．
+
+## Method
+
+### Generative Adversarial Networks
+
+- GANの学習プロセスは判別器$D$と生成器$G$の同時学習．
+- $G$は $p_g | x$を学ぶ
+
+$ \min_G \max_D V_{GAN} (D, G) = E[\log D(x)] + E[\log (1 - D(G(z)))] $
+
+### Least Squares Generative Adversarial Networks
+
+- $a$，$b$，$c$を用いてLSGANの目的関数は以下のようになる
+
+$ min_D V_{LSGAN}(D) = \frac{1}{2} E[(D(x) - b)^2] + \frac{1}{2} E[(D(G(z)) - a)^2]$
+
+$ min_G V_{LSGAN}(G) = \frac{1}{2} E[(D(G(z)) - c)^2]$
+
+- ここで，$a$と$b$はfake dataとreal dataのラベルで，$c$は生成器$G$が分類器$D$にfake dataと信じてほしい値を表している．
+
+#### Benefits of LSGANs
+
+- まず，正規化GANとは違って，決定境界の正しい側に分類されているfake dataに対しても罰金を科す．よって決定境界に向かって生成器はサンプルを生成することになる．
+- また，勾配消失の問題も解決する．
+
+![](./img/ls_sigmoid.png)
+
+#### Parameters Selection
+
+- $a, b, c = -1, 1, 0 \| 0, 1, 1$が推奨．
+
+### Model Architecture
+
+![](./img/model1.png)
