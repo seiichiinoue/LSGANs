@@ -20,7 +20,6 @@ def generate(epoch, G, log_dir='data/generated'):
 
 if __name__ == '__main__':
 
-    # modules
     G = Generator()
     # generate
     generate(epoch=10, G=G)
