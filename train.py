@@ -69,18 +69,25 @@ def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
             G_optimizer.step()
             G_running_loss += G_loss.data.item()
 
-        print('epoch: {}, discriminator loss: {}, generator loss: {}'.format(i, D_running_loss, G_running_loss))
+        print('epoch: {}, loss_d: {}, loss_g: {}'.format(i + 1, D_running_loss, G_running_loss))
 
     torch.save(G.state_dict(), 'model/generator.pth')
     torch.save(D.state_dict(), 'model/discriminator.pth')
 
 
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='Train LSGANs model.')
     
+    # data parameter
+    parser.add_argument('--epoch', type=int, help='num of epoch', default=30)
+    parser.add_argument('--batch_size', type=int, help='num of batch size', default=128)
+    arg = parser.parse_args()
+
     # args
-    epoch = 30
     z_dim = 62
-    batch_size = 128
+    epoch = arg.epoch
+    batch_size = arg.batch_size
 
     # dataset
     transform = transforms.Compose([

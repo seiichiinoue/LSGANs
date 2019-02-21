@@ -23,3 +23,4 @@ if __name__ == '__main__':
     G = Generator()
     # generate
     generate(epoch=10, G=G)
+    
