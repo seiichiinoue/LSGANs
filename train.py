@@ -69,7 +69,10 @@ def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
             G_optimizer.step()
             G_running_loss += G_loss.data.item()
 
-        print('epoch: {}, loss_d: {}, loss_g: {}'.format(i + 1, D_running_loss, G_running_loss))
+        print('epoch: %d loss_d: %.3f loss_g: %.3f' % (i + 1, D_running_loss / batch_size, G_running_loss / batch_size))
+
+        with open('./data/log/log.txt', mode='a') as f:
+            print('epoch: %d loss_d: %.3f loss_g: %.3f\n' % (i + 1, D_running_loss / batch_size, G_running_loss / batch_size), file=f)
 
     torch.save(G.state_dict(), 'model/generator.pth')
     torch.save(D.state_dict(), 'model/discriminator.pth')
