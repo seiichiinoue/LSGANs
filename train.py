@@ -26,7 +26,7 @@ def generate(epoch, G, log_dir='data/generated'):
     
     # generate sample via generator
     samples = G(sample_z).data.cpu()
-    save_image(samples, os.path.join(log_dir, 'epoch_%03d.png' % (epoch)))
+    save_image(samples, os.path.join(log_dir, 'epoch_%03d.png' % (epoch)), nrow=16)
 
 
 def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
