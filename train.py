@@ -1,6 +1,7 @@
 import pickle
 import argparse
 import numpy as np
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -10,6 +11,22 @@ from torchvision.utils import save_image
 import matplotlib.pyplot as plt
 # my modules
 from model import *
+
+
+def generate(epoch, G, log_dir='data/generated'):
+    
+    G.eval()
+    
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+
+    # generate randoms
+    z_dim = 62
+    sample_z = torch.rand((128, z_dim))
+    
+    # generate sample via generator
+    samples = G(sample_z).data.cpu()
+    save_image(samples, os.path.join(log_dir, 'epoch_%03d.png' % (epoch)))
 
 
 def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
@@ -71,8 +88,12 @@ def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
 
         print('epoch: %d loss_d: %.3f loss_g: %.3f' % (i + 1, D_running_loss / batch_size, G_running_loss / batch_size))
 
+        # print log
         with open('./data/log/log.txt', mode='a') as f:
-            print('epoch: %d loss_d: %.3f loss_g: %.3f\n' % (i + 1, D_running_loss / batch_size, G_running_loss / batch_size), file=f)
+            print('epoch: %d loss_d: %.3f loss_g: %.3f' % (i + 1, D_running_loss / batch_size, G_running_loss / batch_size), file=f)
+
+        # generate image
+        generate(epoch=epoch, G=G)
 
     torch.save(G.state_dict(), 'model/generator.pth')
     torch.save(D.state_dict(), 'model/discriminator.pth')

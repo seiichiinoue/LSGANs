@@ -4,7 +4,6 @@ import torch
 import torch.nn as nn
 import torch.functional as F
 import torch.optim as optim
-from torchvision.utils import save_image
 
 
 class Generator(nn.Module):
@@ -64,7 +63,7 @@ class Discriminator(nn.Module):
         return x
 
 if __name__ == '__main__':
-    
+
     # check model shape
     print(Generator())
     print(Discriminator())
