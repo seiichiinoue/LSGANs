@@ -2,6 +2,8 @@
 
 ## Description
 
+- implementation of [Least Squares Generative Adversarial Networks](https://arxiv.org/pdf/1611.04076.pdf)
+
 - I used MNIST as train data.
 
 - Mainly, learning process is same as Reguler GAN. But LSGAN, uses Least Squares criterion.
