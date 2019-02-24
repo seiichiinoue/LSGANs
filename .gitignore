@@ -1,7 +1,9 @@
 # trial
 trial.ipynb
+train.ipynb
 generate.py
 
 # init
 .ipynb_checkpoints
 __pycache__
+data/animeface/
