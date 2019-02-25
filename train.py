@@ -57,7 +57,10 @@ def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
             # random generating img seeds
             z = torch.rand((batch_size, z_dim))
 
+            # --------------------
             # update discriminator
+            # --------------------
+
             D_optimizer.zero_grad()
 
             # real
@@ -66,7 +69,7 @@ def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
 
             # fake
             fake_img = G(z)
-            D_fake = D(fake_img.detach())  # stop propagate to G
+            D_fake = D(fake_img.detach())  # stop back propagate to G
             D_fake_loss = torch.sum((D_fake - a) ** 2)
 
             # minimizing loss
@@ -75,7 +78,10 @@ def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
             D_optimizer.step()
             D_running_loss += D_loss.data.item()
 
+            # ----------------
             # update generator
+            # ----------------
+            
             G_optimizer.zero_grad()
 
             fake_img = G(z)
@@ -93,7 +99,7 @@ def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
             print('epoch: %d loss_d: %.3f loss_g: %.3f' % (i + 1, D_running_loss / batch_size, G_running_loss / batch_size), file=f)
 
         # generate image
-        generate(epoch=epoch, G=G)
+        generate(epoch=i+1, G=G)
 
     torch.save(G.state_dict(), 'model/generator.pth')
     torch.save(D.state_dict(), 'model/discriminator.pth')
