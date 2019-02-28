@@ -54,8 +54,8 @@ def train(D, G, train_itr, epoch, batch_size=128, z_dim=62):
             if real_img.size()[0] != batch_size:
                 break
 
-            # random generating img seeds
-            z = torch.rand((batch_size, z_dim))
+            # random sampling from latent space
+            z = torch.rand(batch_size, z_dim)
 
             # --------------------
             # update discriminator
