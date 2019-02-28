@@ -22,7 +22,7 @@ epoch 15
 
 ![](./data/generated/epoch_015.png)
 
-epoch30
+epoch 30
 
 ![](./data/generated/epoch_030.png)
 
