@@ -7,3 +7,11 @@ generate.py
 .ipynb_checkpoints
 __pycache__
 data/animeface/
+
+# anime
+model_anime.py
+train_anime.py
+dataset.py
+data/generated/anime/
+data/log/log_anime.txt
+data/animeface/
