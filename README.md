@@ -18,7 +18,7 @@ epoch 1
 
 ![](./data/generated/epoch_001.png)
 
-epoch 10
+epoch 15
 
 ![](./data/generated/epoch_015.png)
 
