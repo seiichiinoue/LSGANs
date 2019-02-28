@@ -20,7 +20,7 @@ epoch 1
 
 epoch 10
 
-![](./data/generated/epoch_010.png)
+![](./data/generated/epoch_015.png)
 
 epoch30
 
