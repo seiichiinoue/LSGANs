@@ -53,7 +53,8 @@ class Discriminator(nn.Module):
             nn.BatchNorm1d(1024),
             nn.LeakyReLU(0.2),
             nn.Linear(1024, 1),
-            nn.Sigmoid(),
+            # nn.Sigmoid(),
+            # lsgan not using activation function with Generator
         )
     
     def forward(self, input):
