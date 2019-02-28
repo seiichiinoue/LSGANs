@@ -14,6 +14,16 @@
 
 - Generated images after trained LSGANs model 30 epochs
 
+epoch 1
+
+![](./data/generated/epoch_001.png)
+
+epoch 10
+
+![](./data/generated/epoch_010.png)
+
+epoch30
+
 ![](./data/generated/epoch_030.png)
 
 
